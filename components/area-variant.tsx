@@ -6,6 +6,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
+  TooltipProps,
 } from "recharts";
 
 import { CustomTooltip } from "./custom-tooltip";
@@ -40,14 +41,12 @@ export const AreaVariant = ({ data }: AreaVariantProps) => {
           tickLine={false}
           dataKey="date"
           tickFormatter={(value) => format(value, "dd MMM")}
-          style={{
-            fontSize: "12px",
-          }}
           tickMargin={16}
+          tick={{ fontSize: "12px" }}
         />
 
         <Tooltip
-          content={({ active, payload }) => (
+          content={({ active, payload }: TooltipProps<any, any>) => (
             <CustomTooltip active={active} payload={payload} />
           )}
         />
