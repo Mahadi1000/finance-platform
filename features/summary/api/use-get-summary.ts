@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { client } from "@/lib/hono";
 import { convertAmountFromMilliunits } from "@/lib/utils";
 
+
 export const useGetSummary = () => {
   const searchParams = useSearchParams();
   const from = searchParams.get("from") || "";
@@ -30,11 +31,11 @@ export const useGetSummary = () => {
         incomeAmount: convertAmountFromMilliunits(data.incomeAmount),
         expensesAmount: convertAmountFromMilliunits(data.expensesAmount),
         remainingAmount: convertAmountFromMilliunits(data.remainingAmount),
-        categories: data.categories.map((category) => ({
+        categories: data.categories.map((category: { value: number; [key: string]: any }) => ({
           ...category,
           value: convertAmountFromMilliunits(category.value),
         })),
-        days: data.days.map((day) => ({
+        days: data.days.map((day: { income: number; expenses: number; [key: string]: any }) => ({
           ...day,
           income: convertAmountFromMilliunits(day.income),
           expenses: convertAmountFromMilliunits(day.expenses),
